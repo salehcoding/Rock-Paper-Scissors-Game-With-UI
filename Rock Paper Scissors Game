@@ -1,0 +1,40 @@
+import random
+import tkinter as tk
+from tkinter import messagebox
+
+
+def play(user_choice):
+    choices = ["rock", "paper", "scissors"]
+    computer_choice = random.choice(choices)
+
+    if user_choice == computer_choice:
+        result = "It's a tie!"
+    elif (user_choice == "rock" and computer_choice == "paper") or \
+            (user_choice == "paper" and computer_choice == "scissors") or \
+            (user_choice == "scissors" and computer_choice == "rock"):
+        result = "You lost! Computer chose " + computer_choice
+    else:
+        result = "You won! Computer chose " + computer_choice
+
+    messagebox.showinfo("Result", result)
+    ask_to_continue()
+
+
+def ask_to_continue():
+    continue_game = messagebox.askyesno("Continue game", "Would you like to continue the game?")
+    if not continue_game:
+        root.destroy()
+
+root = tk.Tk()
+root.title("Rock-Paper-Scissors Game")
+
+
+btn_rock = tk.Button(root, text= "Rock", width= 20, command= lambda: play("rock"))
+btn_paper = tk.Button(root, text= "Paper", width= 20, command= lambda: play("paper"))
+btn_scissors = tk.Button(root, text="Scissors", width=20, command=lambda: play("scissors"))
+
+btn_rock.pack(pady= 10)
+btn_paper.pack(pady=10)
+btn_scissors.pack(pady=10)
+
+root.mainloop()
