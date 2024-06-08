@@ -1,6 +1,8 @@
+import sys
 import random
 import tkinter as tk
 from tkinter import messagebox
+from PIL import Image, ImageTk
 
 
 def play(user_choice):
@@ -28,13 +30,25 @@ def ask_to_continue():
 root = tk.Tk()
 root.title("Rock-Paper-Scissors Game")
 
+rock_img = Image.open("rock.png")
+paper_img = Image.open("paper.png")
+scissors_img = Image.open("scissors.png")
 
-btn_rock = tk.Button(root, text= "Rock", width= 20, command= lambda: play("rock"))
-btn_paper = tk.Button(root, text= "Paper", width= 20, command= lambda: play("paper"))
-btn_scissors = tk.Button(root, text="Scissors", width=20, command=lambda: play("scissors"))
+rock_photo = ImageTk.PhotoImage(rock_img)
+paper_photo = ImageTk.PhotoImage(paper_img)
+scissors_photo = ImageTk.PhotoImage(scissors_img)
 
-btn_rock.pack(pady= 10)
-btn_paper.pack(pady=10)
-btn_scissors.pack(pady=10)
+
+btn_rock = tk.Button(root, image=rock_photo, command=lambda: play("rock"))
+btn_paper = tk.Button(root, image=paper_photo, command=lambda: play("paper"))
+btn_scissors = tk.Button(root, image=scissors_photo, command=lambda: play("scissors"))
+
+btn_rock.pack(side=tk.LEFT, padx=10)
+btn_paper.pack(side=tk.LEFT, padx=10)
+btn_scissors.pack(side=tk.LEFT, padx=10)
+
+btn_rock.image = rock_photo
+btn_paper.image = paper_photo
+btn_scissors.image = scissors_photo
 
 root.mainloop()
